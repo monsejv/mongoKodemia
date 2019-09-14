@@ -1,10 +1,9 @@
 const express = require('express')
 const post = require('../usescases/posts')
-const postInfo = require('../models/posts')
 const router = express.Router()
 
 router.get('/', async (req, res) => {
-    const getPost = await postInfo.find()
+    const getPost = await post.getPosts()
     res.json({
         message: 'Posts added',
         data: {
@@ -15,8 +14,8 @@ router.get('/', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
     const { id } = req.params
-    await postInfo.remove({_id: id});
-    const getPost = await postInfo.find()
+    await post.deletePost(id)
+    const getPost = await post.getPosts()
     res.json({
         message:  `Post deleted in id ${id}`,
         data: {
@@ -27,8 +26,8 @@ router.delete('/:id', async (req, res) => {
 
 router.patch('/:id', async (req, res) => {
     const {id} = req.params
-    await postInfo.update({_id: id}, req.body);
-    const getPost = await postInfo.findById(id)
+    await post.editPost(id, req.body)
+    const getPost = await post.getPostById(id)
     res.json({
         message:  `Post edited in id ${id}`,
         data: {
