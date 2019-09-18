@@ -26,7 +26,7 @@ router.delete('/:id', async (req, res) => {
         const { id } = req.params
         const deleteUser = await user.deleteById(id)
         res.json({
-            message:  `Post ${id} deleted`,
+            message:  `User ${id} deleted`,
             data: {
                 user: deleteUser
             }
