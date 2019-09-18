@@ -12,26 +12,26 @@ function create ({title, date, readTime, description, author, image}){
     return newPost.save()
 }
 
-function getPosts(){
+function getAll(){
     return Post.find()
 }
 
-function getPostById(idPost){
+function getById(idPost){
     return Post.findById(idPost)
 }
 
-function deletePost(idPost){
-    return Post.remove({_id: idPost});
+function deleteById(idPost){
+    return Post.findByIdAndDelete(idPost)
 }
 
-function editPost(idPost, body){
-    return Post.update({_id: idPost}, body);
+function updateById(idPost, postData){
+    return Post.findByIdAndUpdate(idPost, postData);
 }
 
 module.exports =  {
     create,
-    getPosts,
-    deletePost,
-    editPost,
-    getPostById
+    getAll,
+    deleteById,
+    updateById,
+    getById
 }
